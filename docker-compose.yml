@@ -2,8 +2,6 @@ version: '3'
 services:
   live-config:
     image: alaien/mokulive-config
-    environment:
-      - CONFIG_SERVER_URL=https://live-config.herokuapp.com
     ports:
       - "8001:8000"
 
