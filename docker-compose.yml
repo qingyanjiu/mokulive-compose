@@ -3,33 +3,32 @@ services:
   live-config:
     image: alaien/mokulive-config
     ports:
-      - "8001:8000"
+      - "8001:8080"
 
   live-server-callback:
     image: alaien/mokulive-server-callback
     environment:
-      - CONFIG_SERVER_URL=http://localhost:8001
+      - CONFIG_SERVER_URL=http://192.168.199.139:8001
     ports:
       - "8002:8000"
     depends_on:
+      - live-config
+    links:
       - live-config
 
   live-server-nginx:
     image: alaien/mokulive-nginxserver
     environment:
-      - CALLBACK_URL="http:\/\/localhost:8002"
+      - CALLBACK_URL=http:\/\/192.168.199.139:8002
     ports:
       - "8099:80"
       - "1935:1935"
-    depends_on:
-      - live-server-callback
 
   live-server-client:
     image: alaien/mokulive-client
     environment:
-      - CONFIG_SERVER_URL=http://localhost:8001
+      - CONFIG_SERVER_URL=http://192.168.199.139:8001
     ports:
       - "80:8000"
     depends_on:
       - live-config
-
