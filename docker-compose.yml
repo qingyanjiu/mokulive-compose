@@ -13,8 +13,6 @@ services:
       - "8002:8000"
     depends_on:
       - live-config
-    links:
-      - live-config
 
   live-server-nginx:
     image: alaien/mokulive-nginxserver
